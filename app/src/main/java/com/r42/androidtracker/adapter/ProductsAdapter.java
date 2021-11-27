@@ -1,17 +1,22 @@
 package com.r42.androidtracker.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.r42.androidtracker.R;
+import com.r42.androidtracker.activity.ProductDetailActivity;
+import com.r42.androidtracker.activity.ProductsActivity;
 import com.r42.androidtracker.model.Product;
 import com.squareup.picasso.Picasso;
 
@@ -54,13 +59,16 @@ public class ProductsAdapter extends
         return products.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        private Context context;
         public ImageView productImage;
         public TextView productName, productStatus, productDescription, productPrice;
         public CardView productStatusIcon;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
+            this.context = itemView.getContext();
 
             productImage = itemView.findViewById(R.id.product_image);
             productName = itemView.findViewById(R.id.product_name);
@@ -69,5 +77,28 @@ public class ProductsAdapter extends
             productPrice = itemView.findViewById(R.id.product_price);
             productStatusIcon = itemView.findViewById(R.id.product_status_icon);
         }
+
+        @Override
+        public void onClick(View v) {
+            int position = getAdapterPosition();
+            if (position != RecyclerView.NO_POSITION) {
+                Product product = products.get(position);
+                Toast.makeText(context, product.getName(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, ProductDetailActivity.class);
+                intent.putExtra("product", product);
+                context.startActivity(intent);
+            }
+        }
     }
+
+    public void clear() {
+        products.clear();
+        notifyDataSetChanged();
+    }
+
+    public void addAll(List<Product> list) {
+        products.addAll(list);
+        notifyDataSetChanged();
+    }
+
 }

@@ -1,8 +1,11 @@
 package com.r42.androidtracker.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Product {
+public class Product implements Serializable {
+    private static final long serialVersionUID = 3217118697371437988L;
+    private int id;
     private String name;
     private String description;
     private float price;
@@ -10,13 +13,18 @@ public class Product {
     private ArrayList<String> alternativeImages;
     private boolean available;
 
-    public Product(String name, String description, float price, String image, ArrayList<String> alternativeImages, boolean available) {
+    public Product(int id, String name, String description, float price, String image, ArrayList<String> alternativeImages, boolean available) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.image = image;
         this.alternativeImages = alternativeImages;
         this.available = available;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -41,24 +49,5 @@ public class Product {
 
     public boolean isAvailable() {
         return available;
-    }
-
-    public static ArrayList<Product> createProductList() {
-        ArrayList<String> alternativeImagesList = new ArrayList<String>();
-        alternativeImagesList.add("https://source.unsplash.com/random/800x600");
-
-
-        ArrayList<Product> products = new ArrayList<Product>();
-        for (int i = 1; i <= 10; i++) {
-            products.add(new Product(
-                    "Product " + i,
-                    "This is product " + i,
-                    100 * i,
-                    "https://source.unsplash.com/random/800x600",
-                    alternativeImagesList,
-                    i % 3 != 0));
-        }
-
-        return products;
     }
 }
