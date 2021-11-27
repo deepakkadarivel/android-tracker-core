@@ -48,8 +48,8 @@ public class ProductsAdapter extends
         Picasso.get().load(product.getImage()).into(holder.productImage);
         holder.productName.setText(product.getName());
         holder.productDescription.setText(product.getDescription());
-        holder.productPrice.setText("$ " + String.format("%.2f", product.getPrice()));
-        holder.productStatus.setText(product.isAvailable() ? "Available" : "Unavailable");
+        holder.productPrice.setText(holder.context.getResources().getString(R.string.product_price, product.getPrice()));
+        holder.productStatus.setText(product.isAvailable() ? R.string.available : R.string.unavailable);
         holder.productStatus.setTextColor(color);
         holder.productStatusIcon.setCardBackgroundColor(color);
     }
@@ -72,9 +72,9 @@ public class ProductsAdapter extends
 
             productImage = itemView.findViewById(R.id.product_image);
             productName = itemView.findViewById(R.id.product_name);
-            productStatus = itemView.findViewById(R.id.product_status);
             productDescription = itemView.findViewById(R.id.product_description);
             productPrice = itemView.findViewById(R.id.product_price);
+            productStatus = itemView.findViewById(R.id.product_status);
             productStatusIcon = itemView.findViewById(R.id.product_status_icon);
         }
 
@@ -83,7 +83,6 @@ public class ProductsAdapter extends
             int position = getAdapterPosition();
             if (position != RecyclerView.NO_POSITION) {
                 Product product = products.get(position);
-                Toast.makeText(context, product.getName(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context, ProductDetailActivity.class);
                 intent.putExtra("product", product);
                 context.startActivity(intent);

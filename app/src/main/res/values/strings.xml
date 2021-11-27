@@ -1,5 +1,12 @@
 <resources>
     <string name="app_name">Android Tracker</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello World</string>
+    <string name="add_to_cart">Add to cart</string>
+    <string name="add_to_wishlist">Add to wishlist</string>
+    <string name="available">Available</string>
+    <string name="unavailable">Unavailable</string>
+    <string name="product_detail_info1">30 days to change your mind and free returns</string>
+    <string name="product_detail_info2">Delivered within 24 hours</string>
+    <string name="product_price">$%1$.2f</string>
+    <string name="product_price_calculation">Tax rate 21%% - $%1$.2f (~$%2$.2f)</string>
 </resources>
